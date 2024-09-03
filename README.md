@@ -12,8 +12,9 @@ curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/dora-rs/d
 
 ```bash
 cd ..
-git clone git@github.com:dora-rs/dora.git
-git checkout qwenvl2
+git clone git@github.com:dora-rs/dora.git --branch qwenvl2
+
+git clone git@github.com:hiyouga/LLaMA-Factory.git
 ```
 
 3. Install Conda
@@ -41,5 +42,16 @@ dora build graphs/keyboard_teleop.yml
 7. Start the dataflow
 
 ```bash
+dora start graphs/keyboard_teleop.yml
+```
+
+
+# On run
+
+
+```bash
+cd robots/lebai
+conda activate lebai
+dora up
 dora start graphs/keyboard_teleop.yml
 ```

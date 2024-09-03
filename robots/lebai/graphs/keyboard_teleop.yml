@@ -18,6 +18,8 @@ nodes:
       play: interpolation/play
       teach: interpolation/teach
       end_teach: interpolation/end_teach
+    env: 
+      LEBAI_IP: 10.42.1.253
 
   - id: keyboard-listener
     build: pip install dora-keyboard
@@ -74,7 +76,7 @@ nodes:
       IMAGE_HEIGHT: 480
 
   - id: dora-qwenvl-recorder
-    build: pip install -e ../../../dora/node-hub/llama-factory-recorder
+    build: pip install -e ../../../../dora/node-hub/llama-factory-recorder
     path: llama-factory-recorder
     inputs:
       image:
@@ -85,4 +87,4 @@ nodes:
       - text
     env:
       DEFAULT_QUESTION: Respond with left, right, forward, back, up or go home in order for the robotic arm to get the cup.
-      LLAMA_FACTORY_ROOT_PATH: /home/peter/Documents/work/LLaMA-Factory
+      LLAMA_FACTORY_ROOT_PATH: /home/siriyep/Codes/LLaMA-Factory
