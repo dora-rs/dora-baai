@@ -13,3 +13,12 @@ curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/dora-rs/d
 ```bash
 git clone git@github.com:dora-rs/dora.git
 ```
+
+```bash
+conda create -y -n lebai python=3.10.12 && conda activate lebai
+
+cd robots/lebai
+dora up
+dora build keyboard_teleop.yml
+dora start keyboard_teleop.yml
+```
