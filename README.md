@@ -26,7 +26,11 @@ conda create -y -n lebai python=3.10.12 && conda activate lebai
 
 5. Install cargo
 
-6.
+```bash
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+
+6. Install dora nodes
 
 ```bash
 cd robots/lebai
