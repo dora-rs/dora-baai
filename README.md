@@ -35,11 +35,11 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```bash
 cd robots/lebai
 dora up
-dora build keyboard_teleop.yml
+dora build graphs/keyboard_teleop.yml
 ```
 
 7. Start the dataflow
 
 ```bash
-dora start keyboard_teleop.yml
+dora start graphs/keyboard_teleop.yml
 ```
