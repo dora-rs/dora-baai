@@ -11,6 +11,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/dora-rs/d
 ## Clone dora-rs github repo
 
 ```bash
+cd ..
 git clone git@github.com:dora-rs/dora.git
 ```
 
