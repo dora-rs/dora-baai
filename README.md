@@ -13,6 +13,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/dora-rs/d
 ```bash
 cd ..
 git clone git@github.com:dora-rs/dora.git
+git checkout qwenvl2
 ```
 
 ```bash
