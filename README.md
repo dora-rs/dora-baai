@@ -37,6 +37,9 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 cd robots/lebai
 dora up
 dora build graphs/keyboard_teleop.yml
+
+# For visualization
+cargo install --force rerun-cli@0.15.1
 ```
 
 7. Start the dataflow
@@ -54,4 +57,23 @@ cd robots/lebai
 conda activate lebai
 dora up
 dora start graphs/keyboard_teleop.yml
+```
+
+## Qwenvl2
+
+Make sure to install flash-attention 2 before installing qwenvl2
+
+```bash
+# Check version on: https://github.com/Dao-AILab/flash-attention/releases/tag/v2.6.3
+# e.g.:
+pip install https://github.com/Dao-AILab/flash-attention/releases/download/v2.6.3/flash_attn-2.6.3+cu123torch2.4cxx11abiFALSE-cp310-cp310-linux_x86_64.whl
+```
+
+> Make sure to use the abi False version. FYI, ABI means python compatible version.
+
+
+Then
+
+```bash
+dora build qwenvl2.yml
 ```
