@@ -12,9 +12,9 @@ curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/dora-rs/d
 
 ```bash
 cd ..
-git clone git@github.com:dora-rs/dora.git --branch qwenvl2
+git clone https://github.com:dora-rs/dora.git --branch qwenvl2
 
-git clone git@github.com:hiyouga/LLaMA-Factory.git
+git clone https://github.com:hiyouga/LLaMA-Factory.git
 ```
 
 3. Install Conda
@@ -34,12 +34,13 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 6. Install dora nodes
 
 ```bash
-cd robots/lebai
-dora up
-dora build graphs/keyboard_teleop.yml
 
 # For visualization
 cargo install --force rerun-cli@0.15.1
+
+cd robots/lebai
+dora up
+dora build graphs/keyboard_teleop.yml
 ```
 
 7. Start the dataflow
@@ -57,6 +58,33 @@ cd robots/lebai
 conda activate lebai
 dora up
 dora start graphs/keyboard_teleop.yml
+```
+
+## For training the model
+
+- Install llama-factory
+```
+pip install -e "../llama-factory[torch,metrics]"
+```
+
+- Modify `llama-factory/examples/train_lora/qwen2vl_lora_sft.yaml` so that the dataset is the one you want to use,
+
+```yaml,diff
+- dataset: mllm_demo,identity  # video: mllm_video_demo
++ dataset: dora_demo_107,identity`
+```
+
+- You can also choose the 2B model instead of the 7B model with
+
+```yaml,diff
+- model_name_or_path: Qwen/Qwen2-VL-7B-Instruct
++ model_name_or_path: Qwen/Qwen2-VL-2B-Instruct
+```
+
+- Then
+
+```bash
+llamafactory-cli train llama-factory/examples/train_lora/qwen2vl_lora_sft.yaml
 ```
 
 ## Qwenvl2
