@@ -84,7 +84,7 @@ pip install -e "../llama-factory[torch,metrics]"
 - Then
 
 ```bash
-llamafactory-cli train llama-factory/examples/train_lora/qwen2vl_lora_sft.yaml
+llamafactory-cli train examples/train_lora/qwen2vl_lora_sft.yaml
 ```
 
 ## Qwenvl2
