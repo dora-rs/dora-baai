@@ -26,10 +26,10 @@ class Action(Enum):
         "movej",
         [0.1, 0, 0, 0, 0, 0, 0.1],
     )
-    FORWARD = ("forward", "movec", [-0.02, 0, 0, 0, 0, 0, 0.1])
-    BACK = ("back", "movec", [0.02, 0, 0, 0, 0, 0, 0.1])
-    LEFT = ("left", "movec", [0, -0.02, 0, 0, 0, 0, 0.1])
-    RIGHT = ("right", "movec", [0, 0.02, 0, 0, 0, 0, 0.1])
+    FORWARD = ("forward", "movec", [0.02, 0, 0, 0, 0, 0, 0.1])
+    BACK = ("back", "movec", [-0.02, 0, 0, 0, 0, 0, 0.1])
+    LEFT = ("left", "movec", [0, .02, 0, 0, 0, 0, 0.1])
+    RIGHT = ("right", "movec", [0, -0.02, 0, 0, 0, 0, 0.1])
     UP = ("up", "movec", [0, 0, 0.02, 0, 0, 0, 0.1])
     DOWN = ("down", "movec", [0, 0, -0.02, 0, 0, 0, 0.1])
     CLOSE = ("close", "claw", [0])
