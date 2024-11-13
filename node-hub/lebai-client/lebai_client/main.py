@@ -28,7 +28,7 @@ SAVED_POSE_PATH = "pose_library.json"
 
 lebai_sdk.init()
 ROBOT_IP = os.getenv(
-    "LEBAI_IP", "10.42.0.253"
+    "LEBAI_IP", "192.168.43.104"
 )  # 设定机器人ip地址，需要根据机器人实际ip地址修改
 
 

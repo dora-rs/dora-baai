@@ -25,19 +25,19 @@ nodes:
     outputs:
       - char
 
-  - id: dora-microphone
-    build: pip install dora-microphone
-    path: dora-microphone
-    outputs:
-      - audio
+  # - id: dora-microphone
+  #   build: pip install dora-microphone
+  #   path: dora-microphone
+  #   outputs:
+  #     - audio
 
-  - id: dora-distil-whisper
-    build: pip install dora-distil-whisper
-    path: dora-distil-whisper
-    inputs:
-      input: dora-microphone/audio
-    outputs:
-      - text
+  # - id: dora-distil-whisper
+  #   build: pip install dora-distil-whisper
+  #   path: dora-distil-whisper
+  #   inputs:
+  #     input: dora-microphone/audio
+  #   outputs:
+  #     - text
 
   - id: key-interpolation
     path: ../nodes/key_interpolation.py
@@ -46,12 +46,12 @@ nodes:
     outputs:
       - text
 
-  - id: prompt-interpolation
-    path: ../nodes/prompt_interpolation.py
-    inputs:
-      text: dora-distil-whisper/text
-    outputs:
-      - text
+  # - id: prompt-interpolation
+  #   path: ../nodes/prompt_interpolation.py
+  #   inputs:
+  #     text: dora-distil-whisper/text
+  #   outputs:
+  #     - text
 
   - id: interpolation
     path: ../nodes/interpolation.py
@@ -71,7 +71,7 @@ nodes:
       - teach
       - end_teach
 
-  - id: camera
+  - id: camera1
     build: pip install opencv-video-capture
     path: opencv-video-capture
     inputs:
@@ -79,7 +79,19 @@ nodes:
     outputs:
       - image
     env:
-      CAPTURE_PATH: 8
+      CAPTURE_PATH: 2
+      IMAGE_WIDTH: 640
+      IMAGE_HEIGHT: 480
+
+  - id: camera2
+    build: pip install opencv-video-capture
+    path: opencv-video-capture
+    inputs:
+      tick: dora/timer/millis/16
+    outputs:
+      - image
+    env:
+      CAPTURE_PATH: 0
       IMAGE_WIDTH: 640
       IMAGE_HEIGHT: 480
 
@@ -87,29 +99,38 @@ nodes:
     build: cargo install dora-rerun --locked
     path: dora-rerun
     inputs:
-      image:
-        source: camera/image
+      image_1:
+        source: camera1/image
         queue_size: 1
-      text_vlm: dora-qwenvl/tick
-      text_whisper: dora-distil-whisper/text
+      image_2:
+        source: camera2/image
+        queue_size: 1
+      textlog_vlm: dora-qwenvl/tick
+      # text_whisper: dora-distil-whisper/text
     env:
       IMAGE_WIDTH: 640
       IMAGE_HEIGHT: 480
+      RERUN_MEMORY_LIMIT: 25%
 
   - id: dora-qwenvl
-    build: pip install -e ../../../dora/node-hub/dora-qwenvl
+    build: pip install -e ../../../../dora/node-hub/dora-qwenvl
     path: dora-qwenvl
     inputs:
-      image:
-        source: camera/image
+      image_1:
+        source: camera1/image
+        queue_size: 1
+      image_2:
+        source: camera2/image
         queue_size: 1
       tick:
         source: key-interpolation/text
         queue_size: 1
-      text: prompt-interpolation/text
+      tick: dora/timer/millis/1000
+      # text: prompt-interpolation/text
     outputs:
       - text
       - tick
     env:
-      CUSTOM_MODEL_PATH: /home/peter/Documents/work/LLaMA-Factory/saves/qwen2_vl-2b/lora-dora-demo/sft
-      DEFAULT_QUESTION: Respond with left, right, forward, back, up, down or go home in order for the robotic arm to get the cup.
+      CUSTOM_MODEL_PATH: /home/gosim/.cache/modelscope/hub/Qwen/Qwen2-VL-2B-Instruct
+      DEFAULT_QUESTION: Respond with left, right, forward, back, up, down or go home in order for the robotic arm to get the coffee cup.
+      ADAPTER_PATH: /home/gosim/Dev/LLaMA-Factory/saves/qwen2_vl-2b/lora_double_camera/sft
